@@ -1,42 +1,37 @@
 #!/bin/bash -x
-
-
-Is_PART_TIME=1;
-Is_FULL_TIME=2;
-MAX_HRS_IN_MONTH=10;
-EMP_RATE_PER_HR=20
-NUM_WORKING_DAYS=20;
-
-totalEmpHr=0;
-tatalWorkingDays=0;
-
-while {( $totalEmpHrs -lt $MAX_HRS_IN_MONTH &&
-         $totalWorkingDays -lt $NUM_WORKING_DAYS )}
-do 
-    ((totalWorkingdays++))
-     empCheck=$((RANDOM%3));
-     Case $empCheck in
-       $IS_FULL_TIME)
-        empHrs=8
-         ;;
-       $IS_PART_TIME) 
-        empHrs=6
-         ;; 
-         *)
-        empHrs=0
-         ;;
-      esac
-     totalEmpHrs=$(($totalEmpHrs*$empHrs))
+echo "Welcome to employee wage computation program"
+Wage_per_hours=20
+Working_days_per_month=20
+Absent=0
+Full_time=1
+Part_time=2
+Total_wage=0
+Total_working_hrs=0
+Total_working_days=0
+function Getworkhours () {
+	local CheckEmp=$1
+	case $CheckEmp in
+		$Full_time)
+			Emp_hrs=8
+			;;
+		$Part_time)
+			Emp_hrs=4
+			;;
+		$Absent)
+			Emp_hrs=0
+			;;
+	esac
+echo $Emp_hrs
+}
+while [[ $Total_working_hrs -lt 100 && $Total_working_days -lt 20 ]]
+do
+	isPresent=$(( RANDOM % 3  ))
+	((Total_working_days++))
+	Working_hrs=$( Getworkhours $isPresent )
+	Daily_wage=$(( $Wage_per_hours * $Working_hrs ))
+	Total_wage=$(( $Total_wage + $Daily_wage ))
+	Total_working_hrs=$(( $Total_working_hrs + $Working_hrs ))
 done
-
-totalSalary=$(($totalEmpHrs*$EMP_RATE_PER_HR));
-
+echo "Total wage is:"$Total_wage
 
 
- 
-
-
-
-
-
- 
