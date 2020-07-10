@@ -32,13 +32,4 @@ do
 	Total_wage=$(( $Total_wage + $Daily_wage ))
 	Total_working_hrs=$(( $Total_working_hrs + $Working_hrs ))
 done
-echo "Total wage is:"$Total_wage
-
-
- 
-
-
-
-
-
- 
+echo "Total wage is:"$Total_wage 
